@@ -53,7 +53,7 @@ export default function Student() {
       <div style={{margin:"auto", width:"50%"}}>
         <h2>All Students</h2>
         {students.map(student=>(
-          <div style={{padding:"15px", paddingBottom:"15px", textAlign:"left", backgroundColor:"#D3D3D3"}}>
+          <div key={student.id} style={{padding:"15px", paddingBottom:"15px", textAlign:"left", backgroundColor:"#D3D3D3"}}>
             Id: {student.id} <br/>
             Name: {student.name} <br/>
             Email Address: {student.address}
