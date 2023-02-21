@@ -10,11 +10,11 @@ export default function Student() {
 
   const handleClick=(e)=>{
     e.preventDefault();
-    const student={name, address}
+    const student={name,address}
     console.log(student)
-    fetch("http://localhost:8084/students", {
+    fetch("http://localhost:8084/students",{
       method:"POST",
-      headers:{"Conent-Type":"application/json"},
+      headers:{"Content-Type":"application/json"},
       body:JSON.stringify(student)
     }).then(()=>{
       console.log("New Student Added")
