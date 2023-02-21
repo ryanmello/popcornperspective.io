@@ -1,12 +1,13 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 
 export default function Student() {
 
-  const[name, setName] = React.useState('')
-  const[address, setAddress] = React.useState('')
+  const[name, setName] = useState('')
+  const[address, setAddress] = useState('')
+  const[students, setStudents] = useState([])
 
   const handleClick=(e)=>{
     e.preventDefault();
@@ -20,6 +21,13 @@ export default function Student() {
       console.log("New Student Added")
     })
   }
+
+  useEffect(()=>{
+    fetch("http://localhost:8084/students")
+    .then(res=>res.json())
+    .then((result)=>{
+      setStudents(result);
+    })}, [])
 
   return (
     <div>
@@ -41,6 +49,17 @@ export default function Student() {
         />
       </Box>
       <Button variant="contained" onClick={handleClick}>Submit</Button>
+
+      <div style={{margin:"auto", width:"50%"}}>
+        <h2>All Students</h2>
+        {students.map(student=>(
+          <div style={{padding:"15px", paddingBottom:"15px", textAlign:"left", backgroundColor:"#D3D3D3"}}>
+            Id: {student.id} <br/>
+            Name: {student.name} <br/>
+            Email Address: {student.address}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
