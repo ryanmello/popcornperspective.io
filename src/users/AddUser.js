@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AddUser() {
 
@@ -20,7 +20,10 @@ export default function AddUser() {
 
   const onSubmit = async(e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8084/users", user)
+    // only create user if all fields have been inputted
+    if(user.name !== "" && user.username !== "" && user.email !== ""){
+      await axios.post("http://localhost:8084/users", user)
+    }
     navigate("/");
   };
 
@@ -70,9 +73,9 @@ export default function AddUser() {
               <button type="submit" className="btn btn-outline-primary m-2">
                 Submit
               </button>
-              <button type="submit" className="btn btn-outline-danger">
+              <Link className="btn btn-outline-danger" to={"/"}>
                 Cancel
-              </button>
+              </Link>
             </div>
           </form>
         </div>
